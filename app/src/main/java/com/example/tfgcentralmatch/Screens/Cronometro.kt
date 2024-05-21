@@ -75,14 +75,14 @@ fun Cronometro() {
                 colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
                 modifier = Modifier
                     .padding(end = 8.dp)
-                    .size(100.dp, 50.dp)
+                    .size(80.dp, 50.dp)
                     .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)
 
 
             ) {
                 Text(if (isRunning) "PARAR" else "EMPEZAR",
                     color = textColor,
-                    style = TextStyle(fontSize = 15.sp, fontWeight = FontWeight.Bold)
+                    style = TextStyle(fontSize = 10.sp, fontWeight = FontWeight.Bold)
                 )
             }
 
@@ -96,7 +96,7 @@ fun Cronometro() {
                 Text("REINICIAR",
                         color = textColor,
                         style = TextStyle(
-                        fontSize = 15.sp,
+                        fontSize = 10.sp,
                         fontWeight = FontWeight.Bold
                     )
                 )

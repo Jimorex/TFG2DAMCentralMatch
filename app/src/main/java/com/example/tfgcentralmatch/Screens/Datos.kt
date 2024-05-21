@@ -24,16 +24,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.tfgcentralmatch.Model.DatosViewModel
 import com.example.tfgcentralmatch.Model.Partido
 import java.util.stream.Collectors.toMap
 
 @Preview(showBackground = true)
 @Composable
-fun Datos() {
+fun Datos( viewModel: DatosViewModel ){
     val colorTexto = Color(0xFFD9D9D9)
     val colorTabla = Color(0xFF222232)
-    val ensayos1 = remember { mutableStateOf(0) }
-    var partido = Partido( )
 
     Column(
         modifier = Modifier
@@ -68,25 +67,50 @@ fun Datos() {
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Button(onClick = { partido.value.sumarEnsayoLocal() }) {
+                Button(onClick = { viewModel.sumarEnsayoLocal() }) {
                     Text(text = "+")
                 }
-                Button(onClick = {partido.value.restarEnsayoLocal() }) {
+                Button(onClick = {viewModel.restarEnsayoLocal() }) {
                     Text(text = "-")
                 }
-
-
                 Text(
-                    text =  "${partido.ensayos1}- Ensayos - ${partido.value.ensayos2}",
+                    text =  "${viewModel.ensayos1.value.toString()} - Ensayos - ${viewModel.ensayos2.value.toString()}",
                     color = colorTexto,
                     fontSize = 16.sp,
                     modifier = Modifier.align(Alignment.CenterVertically)
                 )
 
-                Button(onClick = { /*TODO: Handle click*/ }) {
+                Button(onClick = { viewModel.sumarEnsayoVisitante()}) {
                     Text(text = "+")
                 }
-                Button(onClick = { /*TODO: Handle click*/ }) {
+                Button(onClick = { viewModel.restarEnsayoVisitante()}) {
+                    Text(text = "-")
+                }
+            }
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Button(onClick = { viewModel.sumarEnsayoLocal() }) {
+                    Text(text = "+")
+                }
+                Button(onClick = {viewModel.restarEnsayoLocal() }) {
+                    Text(text = "-")
+                }
+                Text(
+                    text =  "${viewModel.ensayos1.value.toString()} - Ensayos - ${viewModel.ensayos2.value.toString()}",
+                    color = colorTexto,
+                    fontSize = 16.sp,
+                    modifier = Modifier.align(Alignment.CenterVertically)
+                )
+
+                Button(onClick = { viewModel.sumarEnsayoVisitante()}) {
+                    Text(text = "+")
+                }
+                Button(onClick = { viewModel.restarEnsayoVisitante()}) {
                     Text(text = "-")
                 }
             }

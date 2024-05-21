@@ -1,11 +1,18 @@
-package com.example.tfgcentralmatch
+/*package com.example.tfgcentralmatch
 
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
+import com.example.tfgcentralmatch.Model.DatosViewModel
 
-class AppMarcador() {
+class AppMarcador(viewModel: DatosViewModel) {
 
-    val local: Int = 0
+    private val _local = mutableListOf(0)
     val visitante: Int = 0
 
-}
+    val local : MutableList<Int> = _local
+
+
+
+
+}*/

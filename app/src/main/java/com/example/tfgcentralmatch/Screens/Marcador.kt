@@ -11,21 +11,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.tfgcentralmatch.AppMarcador
+import com.example.tfgcentralmatch.Model.DatosViewModel
 
 @Preview(showBackground = true)
 @Composable
-fun Marcador() {
+fun Marcador(viewModel: DatosViewModel) {
 
-    val marcador = AppMarcador()
-    val local = marcador.local
-    val visitante = marcador.visitante
     val backgroundColor = Color(0xFFB1B1CA)
     val textColor = Color(0xFF222232)
     val buttonColor = Color(0xFFD9D9D9)
-
-
-
 
     Box(
         modifier = Modifier
@@ -49,7 +43,7 @@ fun Marcador() {
                         .align(Alignment.CenterVertically)
                 )
                 Text(
-                    text = "$local - $visitante",
+                    text = "${viewModel.local.value.toString()} - ${viewModel.visitante.value}",
                     fontSize = 50.sp,
                     modifier = Modifier
                         .padding(16.dp)

@@ -9,19 +9,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
+import com.example.tfgcentralmatch.Model.DatosViewModel
 
 @Preview(showBackground = true)
 @Composable
 fun PartidoNuevo(navController: NavController) {
     val backgroundColor = Color(0xFFB1B1CA)
 
-    Box() {
-        Column {
-            Marcador() }
-        Column {
-            Cronometro()
-            Datos()
-
-        }
+    Box {
+        Partido(viewModel =DatosViewModel())
     }
 }

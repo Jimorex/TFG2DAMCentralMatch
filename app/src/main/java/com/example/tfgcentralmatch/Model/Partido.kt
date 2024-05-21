@@ -5,7 +5,7 @@ data class Partido(
     val id: String?,
     val nombre: String,
     var ensayos1: Int,
-    private var ensayos2: Int,
+    internal var ensayos2: Int,
     private val conversiones1: Int,
     private val conversiones2: Int,
     private val golpesCastigo1: Int,
