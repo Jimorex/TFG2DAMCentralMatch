@@ -9,6 +9,7 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.tfgcentralmatch.Navigation.AppNavigaton
 import com.example.tfgcentralmatch.Screens.Inicio
 import com.example.tfgcentralmatch.ui.theme.TFGCENTRALMATCHTheme
 
@@ -22,7 +23,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Inicio(navController)
+                    AppNavigaton()
                 }
             }
         }
@@ -32,6 +33,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     TFGCENTRALMATCHTheme {
-        Inicio(navController)
+        AppNavigaton()
     }
 }

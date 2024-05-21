@@ -28,7 +28,7 @@ import com.example.tfgcentralmatch.R
 
 @Composable
 fun Inicio(navController: NavHostController) {
-    val backgroundColor = Color(0xFF4B4B4B)
+    val backgroundColor = Color(0xFFB1B1CA)
     val buttonColor = Color(0xFFD9D9D9)
     val textColor = Color(0xFF222232)
     val imgFondo = painterResource(id = R.drawable.centralmatch)
@@ -60,7 +60,7 @@ fun Inicio(navController: NavHostController) {
         )
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Button(
-                onClick = { /*TODO: Handle click*/ },
+                onClick = { navController.navigate("PartidoNuevo") },
                 colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
                 modifier = Modifier
                     .padding(bottom = 25.dp)

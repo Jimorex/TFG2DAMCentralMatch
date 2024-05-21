@@ -1,26 +1,49 @@
 package com.example.tfgcentralmatch.Model
 
+
 data class Partido(
     val id: String?,
     val nombre: String,
-    val ensayos1: Int,
-    val ensayos2: Int,
-    val conversiones1: Int,
-    val conversiones2: Int,
-    val golpesCastigo1: Int,
-    val golpesCastigo2: Int,
-    val drop1: Int,
-    val drop2: Int,
-    val mele1: Int,
-    val mele2: Int,
-    val touche1: Int,
-    val touche2: Int,
-    val tarjetasAmarillas1: Int,
-    val tarjetasAmarillas2: Int,
-    val tarjetasRojas1: Int,
-    val tarjetasRojas2: Int,
+    var ensayos1: Int,
+    private var ensayos2: Int,
+    private val conversiones1: Int,
+    private val conversiones2: Int,
+    private val golpesCastigo1: Int,
+    private val golpesCastigo2: Int,
+    private val drop1: Int,
+    private val drop2: Int,
+    private val mele1: Int,
+    private val mele2: Int,
+    private val touche1: Int,
+    private val touche2: Int,
+    private val tarjetasAmarillas1: Int,
+    private val tarjetasAmarillas2: Int,
+    private val tarjetasRojas1: Int,
+    private val tarjetasRojas2: Int,
 
-){
+    ){
+
+    fun sumarEnsayoLocal() {
+        ensayos1 = ensayos1 + 1
+    }
+
+    fun sumarEnsayoVisitante() {
+        ensayos2 = ensayos2 + 1
+    }
+
+    fun restarEnsayoLocal() {
+        if (ensayos1 > 0) {
+            ensayos1 = ensayos1 - 1
+        }
+    }
+
+    fun restarEnsayoVisitante() {
+        if (ensayos2 > 0) {
+            ensayos2 = ensayos2 - 1
+        }
+    }
+
+
     fun toMap(): MutableMap<String, Any?> {
         return mutableMapOf(
             "nombre" to this.nombre,

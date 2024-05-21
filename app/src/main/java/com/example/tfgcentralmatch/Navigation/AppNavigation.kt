@@ -5,6 +5,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.tfgcentralmatch.Screens.Inicio
+import com.example.tfgcentralmatch.Screens.PartidoNuevo
 
 @Composable
 fun AppNavigaton() {
@@ -15,5 +16,6 @@ fun AppNavigaton() {
         startDestination = PantallasApp.Inicio.ruta
     ){
         composable(PantallasApp.Inicio.ruta){ Inicio(navController) }
+        composable(PantallasApp.PartidoNuevo.ruta){ PartidoNuevo(navController) }
     }
 }
