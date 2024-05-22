@@ -1,5 +1,7 @@
 package com.example.tfgcentralmatch.Screens
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -11,12 +13,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import com.example.tfgcentralmatch.Model.DatosViewModel
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true)
 @Composable
 fun PartidoNuevo(navController: NavController) {
-    val backgroundColor = Color(0xFFB1B1CA)
-
     Box {
-        Partido(viewModel =DatosViewModel())
+        Partido(viewModel =DatosViewModel(), navController = navController)
     }
 }

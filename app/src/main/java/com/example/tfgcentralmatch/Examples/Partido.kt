@@ -1,4 +1,4 @@
-package com.example.tfgcentralmatch.Model
+package com.example.tfgcentralmatch.Examples
 
 
 data class Partido(

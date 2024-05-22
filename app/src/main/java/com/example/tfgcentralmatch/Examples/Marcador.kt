@@ -1,4 +1,4 @@
-package com.example.tfgcentralmatch.Screens
+package com.example.tfgcentralmatch.Examples
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border

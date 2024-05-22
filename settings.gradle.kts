@@ -15,4 +15,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "TFG CENTRAL MATCH"
 include(":app")
- 
