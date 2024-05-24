@@ -9,6 +9,8 @@ import androidx.navigation.compose.rememberNavController
 import com.example.tfgcentralmatch.Model.DatosViewModel
 import com.example.tfgcentralmatch.Screens.Inicio
 import com.example.tfgcentralmatch.Screens.PartidoNuevo
+import com.example.tfgcentralmatch.Screens.PartidoS14S16VET
+import com.example.tfgcentralmatch.Screens.PartidoS18
 import com.example.tfgcentralmatch.Screens.PartidoSenior
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -23,5 +25,7 @@ fun AppNavigaton() {
         composable(PantallasApp.Inicio.ruta){ Inicio(navController) }
         composable(PantallasApp.PartidoNuevo.ruta){ PartidoNuevo(navController) }
         composable("SENIOR"){ PartidoSenior(viewModel = DatosViewModel(), navController) }
+        composable("S18"){ PartidoS18(viewModel = DatosViewModel(), navController) }
+        composable("S14/S16/VET"){ PartidoS14S16VET(viewModel = DatosViewModel(), navController) }
     }
 }
