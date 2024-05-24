@@ -17,6 +17,7 @@ import com.example.tfgcentralmatch.ui.theme.TFGCENTRALMATCHTheme
 
 class MainActivity : ComponentActivity() {
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -32,6 +33,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+@RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {

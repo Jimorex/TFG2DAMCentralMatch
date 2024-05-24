@@ -1,7 +1,6 @@
 package com.example.tfgcentralmatch.Screens
 
 import android.os.Build
-import android.os.FileUtils.copy
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -47,7 +46,7 @@ import kotlinx.coroutines.launch
 @RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true)
 @Composable
-fun Partido(viewModel: DatosViewModel, navController : NavController){
+fun PartidoSenior(viewModel: DatosViewModel, navController : NavController){
 
     var timePassed by remember { mutableStateOf(0L) } // En milisegundos
     var isRunning by remember { mutableStateOf(false) }
@@ -64,7 +63,7 @@ fun Partido(viewModel: DatosViewModel, navController : NavController){
         modifier = Modifier
             .fillMaxSize()
             .background(backgroundColor)
-            .padding(start = 5.dp, end = 5.dp),
+            .padding(5.dp),
         contentAlignment = Alignment.TopCenter,
     ) {
         Image(
@@ -115,7 +114,7 @@ fun Partido(viewModel: DatosViewModel, navController : NavController){
     }
     Column(
         modifier = Modifier
-            .padding(top = 96.dp, end = 96.dp, start = 96.dp),
+            .padding(top = 101.dp, end = 96.dp, start = 96.dp),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
 
@@ -191,8 +190,8 @@ fun Partido(viewModel: DatosViewModel, navController : NavController){
     }
             Column(
                 modifier = Modifier
-                    .padding(top = 250.dp, start = 5.dp, end = 5.dp, bottom = 145.dp)
-                    .background(colorTabla.copy(alpha = 0.7f)),
+                    .padding(top = 250.dp, start = 5.dp, end = 5.dp)
+                    .fillMaxHeight(0.3f),
                 verticalArrangement = Arrangement.Top,
                 horizontalAlignment = Alignment.CenterHorizontally
 
@@ -214,7 +213,12 @@ fun Partido(viewModel: DatosViewModel, navController : NavController){
                             .align(Alignment.Center)
                     )
                 }
-                LazyColumn{
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxHeight(0.56f)
+                        .background(colorTabla.copy(alpha = 0.7f))
+
+                ){
                     //Ensayos
                     item {
                         Row(
@@ -950,7 +954,7 @@ fun Partido(viewModel: DatosViewModel, navController : NavController){
             }
             Column (
                 modifier = Modifier
-                    .padding(top = 620.dp)
+                    .padding(bottom = 30.dp)
                     .fillMaxWidth(),
                 verticalArrangement = Arrangement.Bottom,
                 horizontalAlignment = Alignment.CenterHorizontally
@@ -972,7 +976,6 @@ fun Partido(viewModel: DatosViewModel, navController : NavController){
 
                 )
                 Row {
-
 
                     Button(
                         onClick = { },
