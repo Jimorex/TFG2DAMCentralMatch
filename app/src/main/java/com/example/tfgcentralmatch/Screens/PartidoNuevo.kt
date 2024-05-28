@@ -67,7 +67,7 @@ fun PartidoNuevo(navController: NavController) {
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
-                .padding(top = 80.dp)
+                .padding(top = 50.dp)
         ) {
             categorias.forEach { categoria ->
                 Button(
@@ -92,7 +92,7 @@ fun PartidoNuevo(navController: NavController) {
             Button(onClick = { navController.popBackStack() },
                 colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
                 modifier = Modifier
-                    .padding(top = 60.dp)
+                    .padding(top = 20.dp, bottom = 40.dp)
                     .size(250.dp, 70.dp)
                     .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)) {
                 Text("VOLVER",

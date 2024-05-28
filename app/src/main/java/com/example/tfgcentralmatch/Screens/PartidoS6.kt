@@ -147,10 +147,10 @@ fun PartidoS6(viewModel: DatosViewModel, navController : NavController){
                     isRunning = !isRunning
                     if (isRunning) {
                         scope.launch {
-                            while (isRunning && timePassed < 960000) {
+                            while (isRunning && timePassed < 960000) { //16 minutos totales
                                 delay(1000)
                                 timePassed += 1000
-                                if (timePassed.toInt() == 480000) { // Pausa en 40:00
+                                if (timePassed.toInt() == 480000) { // Pausa en 08:00
                                     isRunning = false
                                 }
                             }
@@ -292,152 +292,6 @@ fun PartidoS6(viewModel: DatosViewModel, navController : NavController){
                             }
                         }
                     }
-                    //Conversiones
-                    item {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(10.dp),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Button(
-                                onClick = { viewModel.sumarConversionLocal() },
-                                colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
-                                modifier = Modifier
-                                    .size(40.dp, 40.dp)
-                                    .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)
-    
-                            ) {
-                                Text(
-                                    text = "+",
-                                    fontSize = 15.sp,
-                                    color = textColor
-                                )
-                            }
-                            Button(
-                                onClick = { viewModel.restarConversionLocal() },
-                                colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
-                                modifier = Modifier
-                                    .size(40.dp, 40.dp)
-                                    .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)
-    
-                            ) {
-                                Text(
-                                    text = "-",
-                                    fontSize = 15.sp,
-                                    color = textColor
-                                )
-                            }
-                            Text(
-                                text = "${viewModel.conversiones1.value.toString()} - Convers. - ${viewModel.conversiones2.value.toString()}",
-                                color = colorTexto,
-                                fontSize = 16.sp,
-                                modifier = Modifier.align(Alignment.CenterVertically)
-                            )
-                            Button(
-                                onClick = { viewModel.sumarConversionVisitante() },
-                                colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
-                                modifier = Modifier
-                                    .size(40.dp, 40.dp)
-                                    .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)
-    
-                            ) {
-                                Text(
-                                    text = "+",
-                                    fontSize = 15.sp,
-                                    color = textColor
-                                )
-                            }
-                            Button(
-                                onClick = { viewModel.restarConversionVisitante() },
-                                colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
-                                modifier = Modifier
-                                    .size(40.dp, 40.dp)
-                                    .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)
-    
-                            ) {
-                                Text(
-                                    text = "-",
-                                    fontSize = 15.sp,
-                                    color = textColor
-                                )
-                            }
-                        }
-                    }
-                    //Drop
-                    item {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(10.dp),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Button(
-                                onClick = { viewModel.sumarDropLocal() },
-                                colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
-                                modifier = Modifier
-                                    .size(40.dp, 40.dp)
-                                    .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)
-    
-                            ) {
-                                Text(
-                                    text = "+",
-                                    fontSize = 15.sp,
-                                    color = textColor
-                                )
-                            }
-                            Button(
-                                onClick = { viewModel.restarDropLocal() },
-                                colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
-                                modifier = Modifier
-                                    .size(40.dp, 40.dp)
-                                    .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)
-    
-                            ) {
-                                Text(
-                                    text = "-",
-                                    fontSize = 15.sp,
-                                    color = textColor
-                                )
-                            }
-                            Text(
-                                text = "${viewModel.drop1.value.toString()} - DropGoal - ${viewModel.drop2.value.toString()}",
-                                color = colorTexto,
-                                fontSize = 16.sp,
-                                modifier = Modifier.align(Alignment.CenterVertically)
-                            )
-                            Button(
-                                onClick = { viewModel.sumarDropVisitante() },
-                                colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
-                                modifier = Modifier
-                                    .size(40.dp, 40.dp)
-                                    .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)
-    
-                            ) {
-                                Text(
-                                    text = "+",
-                                    fontSize = 15.sp,
-                                    color = textColor
-                                )
-                            }
-                            Button(
-                                onClick = { viewModel.restarDropVisitante() },
-                                colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
-                                modifier = Modifier
-                                    .size(40.dp, 40.dp)
-                                    .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)
-    
-                            ) {
-                                Text(
-                                    text = "-",
-                                    fontSize = 15.sp,
-                                    color = textColor
-                                )
-                            }
-                        }
-                    }
                     //Avant
                     item {
                         Row(
@@ -511,80 +365,7 @@ fun PartidoS6(viewModel: DatosViewModel, navController : NavController){
                             }
                         }
                     }
-                    //Melés
-                    item {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(10.dp),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Button(
-                                onClick = { viewModel.sumarMeleLocal() },
-                                colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
-                                modifier = Modifier
-                                    .size(40.dp, 40.dp)
-                                    .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)
-    
-                            ) {
-                                Text(
-                                    text = "+",
-                                    fontSize = 15.sp,
-                                    color = textColor
-                                )
-                            }
-                            Button(
-                                onClick = { viewModel.restarMeleLocal() },
-                                colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
-                                modifier = Modifier
-                                    .size(40.dp, 40.dp)
-                                    .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)
-    
-                            ) {
-                                Text(
-                                    text = "-",
-                                    fontSize = 15.sp,
-                                    color = textColor
-                                )
-                            }
-                            Text(
-                                text = "${viewModel.mele1.value.toString()} - Melés - ${viewModel.mele2.value.toString()}",
-                                color = colorTexto,
-                                fontSize = 16.sp,
-                                modifier = Modifier.align(Alignment.CenterVertically)
-                            )
-                            Button(
-                                onClick = { viewModel.sumarMeleVisitante() },
-                                colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
-                                modifier = Modifier
-                                    .size(40.dp, 40.dp)
-                                    .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)
-    
-                            ) {
-                                Text(
-                                    text = "+",
-                                    fontSize = 15.sp,
-                                    color = textColor
-                                )
-                            }
-                            Button(
-                                onClick = { viewModel.restarMeleVisitante() },
-                                colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
-                                modifier = Modifier
-                                    .size(40.dp, 40.dp)
-                                    .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)
-    
-                            ) {
-                                Text(
-                                    text = "-",
-                                    fontSize = 15.sp,
-                                    color = textColor
-                                )
-                            }
-                        }
-                    }
-                    //Touches
+                    //Fueras
                     item {
                         Row(
                             modifier = Modifier
@@ -599,7 +380,7 @@ fun PartidoS6(viewModel: DatosViewModel, navController : NavController){
                                 modifier = Modifier
                                     .size(40.dp, 40.dp)
                                     .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)
-    
+
                             ) {
                                 Text(
                                     text = "+",
@@ -613,7 +394,7 @@ fun PartidoS6(viewModel: DatosViewModel, navController : NavController){
                                 modifier = Modifier
                                     .size(40.dp, 40.dp)
                                     .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)
-    
+
                             ) {
                                 Text(
                                     text = "-",
@@ -622,7 +403,7 @@ fun PartidoS6(viewModel: DatosViewModel, navController : NavController){
                                 )
                             }
                             Text(
-                                text = "${viewModel.touche1.value.toString()} - Touches - ${viewModel.touche2.value.toString()}",
+                                text = "${viewModel.touche1.value.toString()} - Fueras - ${viewModel.touche2.value.toString()}",
                                 color = colorTexto,
                                 fontSize = 16.sp,
                                 modifier = Modifier.align(Alignment.CenterVertically)
@@ -633,7 +414,7 @@ fun PartidoS6(viewModel: DatosViewModel, navController : NavController){
                                 modifier = Modifier
                                     .size(40.dp, 40.dp)
                                     .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)
-    
+
                             ) {
                                 Text(
                                     text = "+",
@@ -647,7 +428,7 @@ fun PartidoS6(viewModel: DatosViewModel, navController : NavController){
                                 modifier = Modifier
                                     .size(40.dp, 40.dp)
                                     .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)
-    
+
                             ) {
                                 Text(
                                     text = "-",
@@ -730,225 +511,6 @@ fun PartidoS6(viewModel: DatosViewModel, navController : NavController){
                                 )
                             }
                         }
-                    }
-                    //Golpes franco
-                    item {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(10.dp),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Button(
-                                onClick = { viewModel.sumarGolpeFrancoLocal() },
-                                colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
-                                modifier = Modifier
-                                    .size(40.dp, 40.dp)
-                                    .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)
-    
-                            ) {
-                                Text(
-                                    text = "+",
-                                    fontSize = 15.sp,
-                                    color = textColor
-                                )
-                            }
-                            Button(
-                                onClick = { viewModel.restarGolpeFrancoLocal() },
-                                colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
-                                modifier = Modifier
-                                    .size(40.dp, 40.dp)
-                                    .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)
-    
-                            ) {
-                                Text(
-                                    text = "-",
-                                    fontSize = 15.sp,
-                                    color = textColor
-                                )
-                            }
-                            Text(
-                                text = "${viewModel.golpeFranco1.value.toString()} - G. Franco - ${viewModel.golpeFranco2.value.toString()}",
-                                color = colorTexto,
-                                fontSize = 16.sp,
-                                modifier = Modifier.align(Alignment.CenterVertically)
-                            )
-                            Button(
-                                onClick = { viewModel.sumarGolpeFrancoVisitante() },
-                                colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
-                                modifier = Modifier
-                                    .size(40.dp, 40.dp)
-                                    .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)
-    
-                            ) {
-                                Text(
-                                    text = "+",
-                                    fontSize = 15.sp,
-                                    color = textColor
-                                )
-                            }
-                            Button(
-                                onClick = { viewModel.restarGolpeFrancoVisitante() },
-                                colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
-                                modifier = Modifier
-                                    .size(40.dp, 40.dp)
-                                    .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)
-    
-                            ) {
-                                Text(
-                                    text = "-",
-                                    fontSize = 15.sp,
-                                    color = textColor
-                                )
-                            }
-                        }
-                    }
-                    //Tarjetas Amarillas
-                    item {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(10.dp),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Button(
-                                onClick = { viewModel.sumarTarjetaAmarillaLocal() },
-                                colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
-                                modifier = Modifier
-                                    .size(40.dp, 40.dp)
-                                    .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)
-    
-                            ) {
-                                Text(
-                                    text = "+",
-                                    fontSize = 15.sp,
-                                    color = textColor
-                                )
-                            }
-                            Button(
-                                onClick = { viewModel.restarTarjetaAmarillaLocal() },
-                                colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
-                                modifier = Modifier
-                                    .size(40.dp, 40.dp)
-                                    .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)
-    
-                            ) {
-                                Text(
-                                    text = "-",
-                                    fontSize = 15.sp,
-                                    color = textColor
-                                )
-                            }
-                            Text(
-                                text = "${viewModel.tarjetasAmarillas1.value.toString()} - Amarillas - ${viewModel.tarjetasAmarillas2.value.toString()}",
-                                color = colorTexto,
-                                fontSize = 16.sp,
-                                modifier = Modifier.align(Alignment.CenterVertically)
-                            )
-                            Button(
-                                onClick = { viewModel.sumarTarjetaAmarillaVisitante() },
-                                colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
-                                modifier = Modifier
-                                    .size(40.dp, 40.dp)
-                                    .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)
-    
-                            ) {
-                                Text(
-                                    text = "+",
-                                    fontSize = 15.sp,
-                                    color = textColor
-                                )
-                            }
-                            Button(
-                                onClick = { viewModel.restarTarjetaAmarillaVisitante() },
-                                colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
-                                modifier = Modifier
-                                    .size(40.dp, 40.dp)
-                                    .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)
-    
-                            ) {
-                                Text(
-                                    text = "-",
-                                    fontSize = 15.sp,
-                                    color = textColor
-                                )
-                            }
-                        }
-                    }
-                    //Tarjetas Rojas
-                    item {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(10.dp),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Button(
-                                onClick = { viewModel.sumarTarjetaRojaLocal() },
-                                colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
-                                modifier = Modifier
-                                    .size(40.dp, 40.dp)
-                                    .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)
-    
-                            ) {
-                                Text(
-                                    text = "+",
-                                    fontSize = 15.sp,
-                                    color = textColor
-                                )
-                            }
-                            Button(
-                                onClick = { viewModel.restarTarjetaRojaLocal() },
-                                colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
-                                modifier = Modifier
-                                    .size(40.dp, 40.dp)
-                                    .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)
-    
-                            ) {
-                                Text(
-                                    text = "-",
-                                    fontSize = 15.sp,
-                                    color = textColor
-                                )
-                            }
-                            Text(
-                                text = "${viewModel.tarjetasRojas1.value.toString()} - Rojas - ${viewModel.tarjetasRojas2.value.toString()}",
-                                color = colorTexto,
-                                fontSize = 16.sp,
-                                modifier = Modifier.align(Alignment.CenterVertically)
-                            )
-                            Button(
-                                onClick = { viewModel.sumarTarjetaRojaVisitante() },
-                                colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
-                                modifier = Modifier
-                                    .size(40.dp, 40.dp)
-                                    .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)
-    
-                            ) {
-                                Text(
-                                    text = "+",
-                                    fontSize = 15.sp,
-                                    color = textColor
-                                )
-                            }
-                            Button(
-                                onClick = { viewModel.restarTarjetaRojaVisitante() },
-                                colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
-                                modifier = Modifier
-                                    .size(40.dp, 40.dp)
-                                    .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)
-    
-                            ) {
-                                Text(
-                                    text = "-",
-                                    fontSize = 15.sp,
-                                    color = textColor
-                                )
-                            }
-                        }    
                     }
                 }
             }

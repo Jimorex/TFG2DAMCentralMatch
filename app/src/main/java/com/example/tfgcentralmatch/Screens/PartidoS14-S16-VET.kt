@@ -147,10 +147,10 @@ fun PartidoS14S16VET(viewModel: DatosViewModel, navController : NavController){
                     isRunning = !isRunning
                     if (isRunning) {
                         scope.launch {
-                            while (isRunning && timePassed < 3600000) {
+                            while (isRunning && timePassed < 3600000) { // 60 minutos de partido
                                 delay(1000)
                                 timePassed += 1000
-                                if (timePassed.toInt() == 1800000) { // Pausa en 40:00
+                                if (timePassed.toInt() == 1800000) { // Pausa en 30:00
                                     isRunning = false
                                 }
                             }

@@ -1,8 +1,12 @@
 package com.example.tfgcentralmatch.Model
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.firestore.FirebaseFirestore
 
 class DatosViewModel : ViewModel() {
 
@@ -29,7 +33,9 @@ class DatosViewModel : ViewModel() {
     private val _tarjetasAmarillas2 = mutableStateOf(0)
     private val _tarjetasRojas1 = mutableStateOf(0)
     private val _tarjetasRojas2 = mutableStateOf(0)
+    private val _categoria = mutableStateOf("")
 
+    val categoria : State<String> = _categoria
     val nombrePartido : State<String> = _nombrePartido
     val local : State<Int> = _local
     val visitante : State<Int> = _visitante
@@ -54,8 +60,6 @@ class DatosViewModel : ViewModel() {
     val golpeFranco1 : State<Int> = _golpeFranco1
     val golpeFranco2 : State<Int> = _golpeFranco2
 
-    //ENSAYOS
-     //ENSAYOS
     fun sumarEnsayoLocal() {
         _ensayos1.value = _ensayos1.value + 1
         _local.value = _local.value + 5
@@ -76,8 +80,6 @@ class DatosViewModel : ViewModel() {
             _visitante.value = _visitante.value - 5
         }
     }
-    //CONVERSIONES
-    //CONVERSIONES
     fun sumarConversionLocal() {
         _conversiones1.value = _conversiones1.value + 1
         _local.value = _local.value + 2
@@ -98,8 +100,6 @@ class DatosViewModel : ViewModel() {
             _visitante.value = _visitante.value - 2
         }
     }
-    //DROP
-    //DROP
     fun sumarDropLocal() {
         _drop1.value = _drop1.value + 1
         _local.value = _local.value + 3
@@ -120,8 +120,6 @@ class DatosViewModel : ViewModel() {
             _visitante.value = _visitante.value - 3
         }
     }
-    //MELE
-    //MELE
     fun sumarMeleLocal() {
         _mele1.value = _mele1.value + 1
     }
@@ -138,8 +136,6 @@ class DatosViewModel : ViewModel() {
             _mele2.value = _mele2.value - 1
         }
     }
-    //AVANT
-    //AVANT
     fun sumarAvantLocal() {
         _avant1.value = _avant1.value + 1
     }
@@ -156,8 +152,6 @@ class DatosViewModel : ViewModel() {
             _avant2.value = _avant2.value - 1
         }
     }
-    //TOUCHE
-    //TOUCHE
     fun sumarToucheLocal() {
         _touche1.value = _touche1.value + 1
     }
@@ -174,8 +168,6 @@ class DatosViewModel : ViewModel() {
             _touche2.value = _touche2.value - 1
         }
     }
-    //GOLPES DE CASTIGO
-    //GOLPES DE CASTIGO
     fun sumarGolpeCastigoLocal() {
         _golpesCastigo1.value = _golpesCastigo1.value + 1
     }
@@ -192,8 +184,6 @@ class DatosViewModel : ViewModel() {
             _golpesCastigo2.value = _golpesCastigo2.value - 1
         }
     }
-    //GOLPE FRANCO
-    //GOLPE FRANCO
     fun sumarGolpeFrancoLocal() {
         _golpeFranco1.value = _golpeFranco1.value + 1
     }
@@ -210,8 +200,6 @@ class DatosViewModel : ViewModel() {
             _golpeFranco2.value = _golpeFranco2.value - 1
         }
     }
-    //TARJETAS AMARILLAS
-    //TARJETAS AMARILLAS
     fun sumarTarjetaAmarillaLocal() {
         _tarjetasAmarillas1.value = _tarjetasAmarillas1.value + 1
     }
@@ -228,8 +216,6 @@ class DatosViewModel : ViewModel() {
             _tarjetasAmarillas2.value = _tarjetasAmarillas2.value - 1
         }
     }
-    //TARJETAS ROJAS
-     //TARJETAS ROJAS
     fun sumarTarjetaRojaLocal() {
         _tarjetasRojas1.value = _tarjetasRojas1.value + 1
     }
@@ -246,4 +232,46 @@ class DatosViewModel : ViewModel() {
             _tarjetasRojas2.value = _tarjetasRojas2.value - 1
         }
     }
+
+    private val db = FirebaseFirestore.getInstance()
+
+    fun guardarPartido(nombrePartido : String, categoria : String){
+        val partido = hashMapOf(
+
+            "categoria" to categoria,
+            "nombrePartido" to nombrePartido,
+            "local" to local.value,
+            "visitante" to visitante.value,
+            "ensayos1" to ensayos1.value,
+            "ensayos2" to ensayos2.value,
+            "conversiones1" to conversiones1.value,
+            "conversiones2" to conversiones2.value,
+            "golpesCastigo1" to golpesCastigo1.value,
+            "golpesCastigo2" to golpesCastigo2.value,
+            "drop1" to drop1.value,
+            "drop2" to drop2.value,
+            "avant1" to avant1.value,
+            "avant2" to avant2.value,
+            "mele1" to mele1.value,
+            "mele2" to mele2.value,
+            "touche1" to touche1.value,
+            "touche2" to touche2.value,
+            "tarjetasAmarillas1" to tarjetasAmarillas1.value,
+            "tarjetasAmarillas2" to tarjetasAmarillas2.value,
+            "tarjetasRojas1" to tarjetasRojas1.value,
+            "tarjetasRojas2" to tarjetasRojas2.value,
+            "golpeFranco1" to golpeFranco1.value,
+            "golpeFranco2" to golpeFranco2.value
+        )
+        db.collection("partidos")
+            .add(partido)
+            .addOnSuccessListener { documentReference ->
+                println("DocumentSnapshot added with ID: ${documentReference.id}")
+            }
+            .addOnFailureListener { e ->
+                println("Error adding document: $e")
+            }
+
+    }
+
 }

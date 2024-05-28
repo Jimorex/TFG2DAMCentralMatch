@@ -77,7 +77,7 @@ fun Inicio(navController: NavHostController) {
             }
 
             Button(
-                onClick = { /*TODO: Handle click*/ },
+                onClick = { navController.navigate("PartidosGuardados")},
                 colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
                 modifier = Modifier
                     .size(200.dp, 60.dp)

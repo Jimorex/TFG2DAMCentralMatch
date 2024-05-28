@@ -147,10 +147,10 @@ fun PartidoS18(viewModel: DatosViewModel, navController : NavController){
                     isRunning = !isRunning
                     if (isRunning) {
                         scope.launch {
-                            while (isRunning && timePassed < 4200000) {
+                            while (isRunning && timePassed < 4200000) { // Pausa en 70:00
                                 delay(1000)
                                 timePassed += 1000
-                                if (timePassed.toInt() == 2100000) { // Pausa en 40:00
+                                if (timePassed.toInt() == 2100000) { // Pausa en 35:00
                                     isRunning = false
                                 }
                             }

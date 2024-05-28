@@ -37,6 +37,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import com.example.tfgcentralmatch.Model.DatosViewModel
 import com.example.tfgcentralmatch.R
@@ -57,7 +58,10 @@ fun PartidoSenior(viewModel: DatosViewModel, navController : NavController){
     val colorTexto = Color(0xFFD9D9D9)
     val colorTabla = Color(0xFF222232)
     val imgFondo = painterResource(id = R.drawable.centralmatch)
-    var nombrePartido = viewModel.nombrePartido.value
+    var nombrePartido by remember { mutableStateOf(viewModel.nombrePartido.value) }
+    var categoria by remember { mutableStateOf(viewModel.categoria.value) }
+
+    categoria = "SENIOR"
 
     Box(
         modifier = Modifier
@@ -974,11 +978,13 @@ fun PartidoSenior(viewModel: DatosViewModel, navController : NavController){
                     modifier = Modifier
                         .padding(8.dp)
 
+
                 )
                 Row {
 
                     Button(
-                        onClick = { },
+                        onClick = {viewModel.guardarPartido(nombrePartido,categoria)
+                            navController.popBackStack() },
                         colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
                         modifier = Modifier
                             .padding(8.dp)
