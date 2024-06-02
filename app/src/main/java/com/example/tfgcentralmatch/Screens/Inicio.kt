@@ -46,7 +46,7 @@ fun Inicio(navController: NavHostController) {
             modifier = Modifier
                 .align(Alignment.BottomStart)
                 .fillMaxWidth()
-                .fillMaxHeight(0.73f)
+                .fillMaxHeight(1f)
 
         )
         Image(

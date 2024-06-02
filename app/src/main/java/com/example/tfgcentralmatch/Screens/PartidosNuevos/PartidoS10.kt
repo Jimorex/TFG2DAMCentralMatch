@@ -1,4 +1,4 @@
-package com.example.tfgcentralmatch.Screens
+package com.example.tfgcentralmatch.Screens.PartidosNuevos
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -34,6 +34,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -46,7 +47,7 @@ import kotlinx.coroutines.launch
 @RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true)
 @Composable
-fun PartidoS12(viewModel: DatosViewModel, navController : NavController){
+fun PartidoS10(viewModel: DatosViewModel, navController : NavController){
 
     var timePassed by remember { mutableStateOf(0L) } // En milisegundos
     var isRunning by remember { mutableStateOf(false) }
@@ -57,7 +58,10 @@ fun PartidoS12(viewModel: DatosViewModel, navController : NavController){
     val colorTexto = Color(0xFFD9D9D9)
     val colorTabla = Color(0xFF222232)
     val imgFondo = painterResource(id = R.drawable.centralmatch)
-    var nombrePartido = viewModel.nombrePartido.value
+    var nombrePartido by remember { mutableStateOf(viewModel.nombrePartido.value) }
+    var categoria by remember { mutableStateOf(viewModel.categoria.value) }
+
+    categoria = "S10"
 
     Box(
         modifier = Modifier
@@ -91,23 +95,28 @@ fun PartidoS12(viewModel: DatosViewModel, navController : NavController){
             ) {
                 Text(
                     text = "EQUIPO 1",
-                    fontSize = 20.sp,
+                    fontSize = 18.sp,
                     modifier = Modifier
                         .align(Alignment.CenterVertically)
+                        .padding(start = 8.dp)
+                        .weight(1f),
+                    textAlign = TextAlign.Start
                 )
                 Text(
                     text = "${viewModel.local.value.toString()} - ${viewModel.visitante.value.toString()}",
-                    fontSize = 50.sp,
+                    fontSize = 40.sp,
                     modifier = Modifier
-                        .padding(16.dp)
-                        .align(Alignment.CenterVertically)
+                        .padding(top = 16.dp, bottom = 16.dp),
+                    textAlign = TextAlign.Center
                 )
                 Text(
                     text = "EQUIPO 2",
-                    fontSize = 20.sp,
+                    fontSize = 18.sp,
                     modifier = Modifier
                         .align(Alignment.CenterVertically)
-
+                        .padding(end = 8.dp)
+                        .weight(1f),
+                    textAlign = TextAlign.End
                 )
             }
         }
@@ -147,10 +156,10 @@ fun PartidoS12(viewModel: DatosViewModel, navController : NavController){
                     isRunning = !isRunning
                     if (isRunning) {
                         scope.launch {
-                            while (isRunning && timePassed < 1800000) { // 30 minutos totales
+                            while (isRunning && timePassed < 1440000) { // 24 minutos
                                 delay(1000)
                                 timePassed += 1000
-                                if (timePassed.toInt() == 900000) { // Pausa en 15:00
+                                if (timePassed.toInt() == 720000) { // Pausa en 12 minutos
                                     isRunning = false
                                 }
                             }
@@ -438,7 +447,7 @@ fun PartidoS12(viewModel: DatosViewModel, navController : NavController){
                             }
                         }
                     }
-                    //Touches
+                    //Fueras
                     item {
                         Row(
                             modifier = Modifier
@@ -453,7 +462,7 @@ fun PartidoS12(viewModel: DatosViewModel, navController : NavController){
                                 modifier = Modifier
                                     .size(40.dp, 40.dp)
                                     .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)
-    
+
                             ) {
                                 Text(
                                     text = "+",
@@ -467,7 +476,7 @@ fun PartidoS12(viewModel: DatosViewModel, navController : NavController){
                                 modifier = Modifier
                                     .size(40.dp, 40.dp)
                                     .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)
-    
+
                             ) {
                                 Text(
                                     text = "-",
@@ -476,7 +485,7 @@ fun PartidoS12(viewModel: DatosViewModel, navController : NavController){
                                 )
                             }
                             Text(
-                                text = "${viewModel.touche1.value.toString()} - Touches - ${viewModel.touche2.value.toString()}",
+                                text = "${viewModel.touche1.value.toString()} - Fueras - ${viewModel.touche2.value.toString()}",
                                 color = colorTexto,
                                 fontSize = 16.sp,
                                 modifier = Modifier.align(Alignment.CenterVertically)
@@ -487,7 +496,7 @@ fun PartidoS12(viewModel: DatosViewModel, navController : NavController){
                                 modifier = Modifier
                                     .size(40.dp, 40.dp)
                                     .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)
-    
+
                             ) {
                                 Text(
                                     text = "+",
@@ -501,7 +510,7 @@ fun PartidoS12(viewModel: DatosViewModel, navController : NavController){
                                 modifier = Modifier
                                     .size(40.dp, 40.dp)
                                     .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)
-    
+
                             ) {
                                 Text(
                                     text = "-",
@@ -571,79 +580,6 @@ fun PartidoS12(viewModel: DatosViewModel, navController : NavController){
                             }
                             Button(
                                 onClick = { viewModel.restarGolpeCastigoVisitante() },
-                                colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
-                                modifier = Modifier
-                                    .size(40.dp, 40.dp)
-                                    .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)
-    
-                            ) {
-                                Text(
-                                    text = "-",
-                                    fontSize = 15.sp,
-                                    color = textColor
-                                )
-                            }
-                        }
-                    }
-                    //Golpes franco
-                    item {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(10.dp),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Button(
-                                onClick = { viewModel.sumarGolpeFrancoLocal() },
-                                colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
-                                modifier = Modifier
-                                    .size(40.dp, 40.dp)
-                                    .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)
-    
-                            ) {
-                                Text(
-                                    text = "+",
-                                    fontSize = 15.sp,
-                                    color = textColor
-                                )
-                            }
-                            Button(
-                                onClick = { viewModel.restarGolpeFrancoLocal() },
-                                colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
-                                modifier = Modifier
-                                    .size(40.dp, 40.dp)
-                                    .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)
-    
-                            ) {
-                                Text(
-                                    text = "-",
-                                    fontSize = 15.sp,
-                                    color = textColor
-                                )
-                            }
-                            Text(
-                                text = "${viewModel.golpeFranco1.value.toString()} - G. Franco - ${viewModel.golpeFranco2.value.toString()}",
-                                color = colorTexto,
-                                fontSize = 16.sp,
-                                modifier = Modifier.align(Alignment.CenterVertically)
-                            )
-                            Button(
-                                onClick = { viewModel.sumarGolpeFrancoVisitante() },
-                                colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
-                                modifier = Modifier
-                                    .size(40.dp, 40.dp)
-                                    .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)
-    
-                            ) {
-                                Text(
-                                    text = "+",
-                                    fontSize = 15.sp,
-                                    color = textColor
-                                )
-                            }
-                            Button(
-                                onClick = { viewModel.restarGolpeFrancoVisitante() },
                                 colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
                                 modifier = Modifier
                                     .size(40.dp, 40.dp)
@@ -731,79 +667,6 @@ fun PartidoS12(viewModel: DatosViewModel, navController : NavController){
                             }
                         }
                     }
-                    //Tarjetas Rojas
-                    item {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(10.dp),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Button(
-                                onClick = { viewModel.sumarTarjetaRojaLocal() },
-                                colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
-                                modifier = Modifier
-                                    .size(40.dp, 40.dp)
-                                    .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)
-    
-                            ) {
-                                Text(
-                                    text = "+",
-                                    fontSize = 15.sp,
-                                    color = textColor
-                                )
-                            }
-                            Button(
-                                onClick = { viewModel.restarTarjetaRojaLocal() },
-                                colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
-                                modifier = Modifier
-                                    .size(40.dp, 40.dp)
-                                    .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)
-    
-                            ) {
-                                Text(
-                                    text = "-",
-                                    fontSize = 15.sp,
-                                    color = textColor
-                                )
-                            }
-                            Text(
-                                text = "${viewModel.tarjetasRojas1.value.toString()} - Rojas - ${viewModel.tarjetasRojas2.value.toString()}",
-                                color = colorTexto,
-                                fontSize = 16.sp,
-                                modifier = Modifier.align(Alignment.CenterVertically)
-                            )
-                            Button(
-                                onClick = { viewModel.sumarTarjetaRojaVisitante() },
-                                colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
-                                modifier = Modifier
-                                    .size(40.dp, 40.dp)
-                                    .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)
-    
-                            ) {
-                                Text(
-                                    text = "+",
-                                    fontSize = 15.sp,
-                                    color = textColor
-                                )
-                            }
-                            Button(
-                                onClick = { viewModel.restarTarjetaRojaVisitante() },
-                                colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
-                                modifier = Modifier
-                                    .size(40.dp, 40.dp)
-                                    .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)
-    
-                            ) {
-                                Text(
-                                    text = "-",
-                                    fontSize = 15.sp,
-                                    color = textColor
-                                )
-                            }
-                        }    
-                    }
                 }
             }
             Column (
@@ -812,27 +675,26 @@ fun PartidoS12(viewModel: DatosViewModel, navController : NavController){
                     .fillMaxWidth(),
                 verticalArrangement = Arrangement.Bottom,
                 horizontalAlignment = Alignment.CenterHorizontally
-
             ){
-
                 TextField(
                     value = nombrePartido,
-                    onValueChange = { nombrePartido = it },
-                    label = { Text("Nombre del partido") },
+                    onValueChange = {if (it.length <= 30) { nombrePartido = it }},
+                    label = { Text("Nombre del partido", color = textColor) },
                     colors = TextFieldDefaults.textFieldColors(
                         backgroundColor = buttonColor,
                         textColor = textColor,
+                        cursorColor = textColor,
                         focusedIndicatorColor = textColor,
                         unfocusedIndicatorColor = textColor
                     ),
+                    singleLine = true, // Evita saltos de línea
                     modifier = Modifier
                         .padding(8.dp)
-
                 )
                 Row {
-
                     Button(
-                        onClick = { },
+                        onClick = {viewModel.guardarPartido(nombrePartido,categoria)
+                            navController.popBackStack() },
                         colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
                         modifier = Modifier
                             .padding(8.dp)
@@ -840,7 +702,6 @@ fun PartidoS12(viewModel: DatosViewModel, navController : NavController){
                             .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)) {
                         Text("GUARDAR")
                     }
-
                     Button(onClick = { navController.popBackStack() },
                         colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
                         modifier = Modifier

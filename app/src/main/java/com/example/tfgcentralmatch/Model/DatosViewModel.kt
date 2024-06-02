@@ -266,7 +266,8 @@ class DatosViewModel : ViewModel() {
         db.collection("partidos")
             .add(partido)
             .addOnSuccessListener { documentReference ->
-                println("DocumentSnapshot added with ID: ${documentReference.id}")
+                val id = documentReference.id
+                db.collection("partidos").document(id).update("id", id)
             }
             .addOnFailureListener { e ->
                 println("Error adding document: $e")

@@ -1,4 +1,4 @@
-package com.example.tfgcentralmatch.Screens
+package com.example.tfgcentralmatch.Screens.PartidosNuevos
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -34,6 +34,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -46,8 +47,7 @@ import kotlinx.coroutines.launch
 @RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true)
 @Composable
-fun PartidoS18(viewModel: DatosViewModel, navController : NavController){
-
+fun PartidoSenior(viewModel: DatosViewModel, navController : NavController){
     var timePassed by remember { mutableStateOf(0L) } // En milisegundos
     var isRunning by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
@@ -57,7 +57,9 @@ fun PartidoS18(viewModel: DatosViewModel, navController : NavController){
     val colorTexto = Color(0xFFD9D9D9)
     val colorTabla = Color(0xFF222232)
     val imgFondo = painterResource(id = R.drawable.centralmatch)
-    var nombrePartido = viewModel.nombrePartido.value
+    var nombrePartido by remember { mutableStateOf(viewModel.nombrePartido.value) }
+    var categoria by remember { mutableStateOf(viewModel.categoria.value) }
+    categoria = "SENIOR"
 
     Box(
         modifier = Modifier
@@ -91,23 +93,28 @@ fun PartidoS18(viewModel: DatosViewModel, navController : NavController){
             ) {
                 Text(
                     text = "EQUIPO 1",
-                    fontSize = 20.sp,
+                    fontSize = 18.sp,
                     modifier = Modifier
                         .align(Alignment.CenterVertically)
+                        .padding(start = 8.dp)
+                        .weight(1f),
+                    textAlign = TextAlign.Start
                 )
                 Text(
                     text = "${viewModel.local.value.toString()} - ${viewModel.visitante.value.toString()}",
-                    fontSize = 50.sp,
+                    fontSize = 40.sp,
                     modifier = Modifier
-                        .padding(16.dp)
-                        .align(Alignment.CenterVertically)
+                        .padding(top = 16.dp, bottom = 16.dp),
+                    textAlign = TextAlign.Center
                 )
                 Text(
                     text = "EQUIPO 2",
-                    fontSize = 20.sp,
+                    fontSize = 18.sp,
                     modifier = Modifier
                         .align(Alignment.CenterVertically)
-
+                        .padding(end = 8.dp)
+                        .weight(1f),
+                    textAlign = TextAlign.End
                 )
             }
         }
@@ -117,17 +124,13 @@ fun PartidoS18(viewModel: DatosViewModel, navController : NavController){
             .padding(top = 101.dp, end = 96.dp, start = 96.dp),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
-
-
     ) {
-
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .border(4.dp, textColor)
                 .background(buttonColor),
             contentAlignment = Alignment.TopCenter,
-
             ) {
             Text(
                 text = String.format("%02d:%02d", timePassed / 60000, (timePassed % 60000) / 1000),
@@ -136,21 +139,16 @@ fun PartidoS18(viewModel: DatosViewModel, navController : NavController){
         }
         Row(
             modifier = Modifier.padding(top = 16.dp),
-            //horizontalArrangement = Arrangement.SpaceEvenly
-            //verticalArrangement = Arrangement.Top,
-            //horizontalAlignment = Alignment.CenterHorizontally
-
-
         ) {
             Button(
                 onClick = {
                     isRunning = !isRunning
                     if (isRunning) {
                         scope.launch {
-                            while (isRunning && timePassed < 4200000) { // Pausa en 70:00
+                            while (isRunning && timePassed < 4800000) {
                                 delay(1000)
                                 timePassed += 1000
-                                if (timePassed.toInt() == 2100000) { // Pausa en 35:00
+                                if (timePassed.toInt() == 2400000) { // Pausa en 40:00
                                     isRunning = false
                                 }
                             }
@@ -162,8 +160,6 @@ fun PartidoS18(viewModel: DatosViewModel, navController : NavController){
                     .padding(end = 8.dp)
                     .size(80.dp, 50.dp)
                     .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)
-
-
             ) {
                 Text(if (isRunning) "PARAR" else "EMPEZAR",
                     color = textColor,
@@ -958,27 +954,26 @@ fun PartidoS18(viewModel: DatosViewModel, navController : NavController){
                     .fillMaxWidth(),
                 verticalArrangement = Arrangement.Bottom,
                 horizontalAlignment = Alignment.CenterHorizontally
-
             ){
-
                 TextField(
                     value = nombrePartido,
-                    onValueChange = { nombrePartido = it },
-                    label = { Text("Nombre del partido") },
+                    onValueChange = {if (it.length <= 30) { nombrePartido = it }},
+                    label = { Text("Nombre del partido", color = textColor) },
                     colors = TextFieldDefaults.textFieldColors(
                         backgroundColor = buttonColor,
                         textColor = textColor,
+                        cursorColor = textColor,
                         focusedIndicatorColor = textColor,
                         unfocusedIndicatorColor = textColor
                     ),
+                    singleLine = true, // Evita saltos de línea
                     modifier = Modifier
                         .padding(8.dp)
-
                 )
                 Row {
-
                     Button(
-                        onClick = { },
+                        onClick = {viewModel.guardarPartido(nombrePartido,categoria)
+                            navController.popBackStack() },
                         colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
                         modifier = Modifier
                             .padding(8.dp)
@@ -986,7 +981,6 @@ fun PartidoS18(viewModel: DatosViewModel, navController : NavController){
                             .border(4.dp, textColor, shape = MaterialTheme.shapes.medium)) {
                         Text("GUARDAR")
                     }
-
                     Button(onClick = { navController.popBackStack() },
                         colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
                         modifier = Modifier
